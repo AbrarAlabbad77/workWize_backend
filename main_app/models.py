@@ -28,7 +28,7 @@ class Task(models.Model):
     project_id = models.ForeignKey(Project, on_delete=models.RESTRICT)
     
     def __str__(self):
-        return self.title
+        return self.title 
 
     
 class TeamMember(models.Model):
@@ -40,6 +40,6 @@ class TeamMember(models.Model):
     tasks = models.ManyToManyField(Task)
     
     def __str__(self):
-        return self.name
+        return self.name 
     
 
