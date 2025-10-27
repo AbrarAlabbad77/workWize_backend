@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import ManagerIndex, ManagerDetails, TeamMemberDetails
+from .views import ManagerIndex, ManagerDetails, TeamMemberDetails,AssignTaskToTeamMember
 from .views import TeamMemberIndex, ProjectDetails, ProjectIndex, TaskDetails, TaskIndex
 
 urlpatterns = [
@@ -18,4 +18,8 @@ urlpatterns = [
     # Task CRUD 
     path('tasks/', TaskIndex.as_view(), name='TaskIndex_path'),
     path('tasks/<int:task_id>/', TaskDetails.as_view(), name='TaskDetailsm_path'),
+    
+    
+    # Relationship Endpoints
+    path('members/<int:teamMember_id>/assign-task/',AssignTaskToTeamMember.as_view(), name='assign-task_path')
 ]

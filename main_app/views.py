@@ -215,3 +215,22 @@ class TaskDetails(APIView):
             return Response({'message': f' Task {task_id} has been deleted'},status=status.HTTP_204_NO_CONTENT)
         except Exception as error:
             return Response({'ERROR': str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)          
+        
+        
+#  ############################# Relationship Endpoints ##############################
+
+
+class AssignTaskToTeamMember(APIView):
+    
+    def post(self,request, teamMember_id):
+        try:
+            team_member = get_object_or_404(TeamMember, id=teamMember_id) 
+            task_id = request.data.get('task_id')
+            cureentTask = get_object_or_404(Task, id=task_id)
+            
+            # have the member in (team_member) var and the task id in (cureentTask) var
+            team_member.tasks.add(cureentTask)
+            return Response({'message': f'Task {cureentTask.title} assigned to {team_member.name} succcessfully' 
+                             }, status=status.HTTP_200_OK)
+        except Exception as error:
+            return Response({'ERROR': str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
