@@ -219,7 +219,7 @@ class TaskDetails(APIView):
         
 #  ############################# Relationship Endpoints ##############################
 
-
+# assign task to specific team member 
 class AssignTaskToTeamMember(APIView):
     
     def post(self,request, teamMember_id):
@@ -235,7 +235,7 @@ class AssignTaskToTeamMember(APIView):
         except Exception as error:
             return Response({'ERROR': str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-
+# update manager for  project
 class AssignManagerToProject(APIView):
     
     def post(self,request, project_id):
@@ -251,14 +251,26 @@ class AssignManagerToProject(APIView):
         except Exception as error:
             return Response({'ERROR': str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  
         
-
+# get all task for specific team member 
 class TeamMemberTasks(APIView):
     
-    def get(self, rquest, teamMember_id):
+    def get(self, request, teamMember_id):
         team_member = get_object_or_404(TeamMember, id=teamMember_id)
         tasks = team_member.tasks.all()
-        serializer = TaskSerializer(Task, mant=True)
+        serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
+    
+
+# get all task for specific project 
+class ProjectTask(APIView):
+    
+    def get(self,request, project_id):
+        project= get_object_or_404(Project, id=project_id)
+        tasks = Task.objects.filter(project_id=project_id)
+        serializer = TaskSerializer(tasks, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+        
     
     
     

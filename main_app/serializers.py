@@ -28,3 +28,7 @@ class ProjectSerializer(serializers.ModelSerializer):
         # table name
         model= Project
         fields = '__all__' 
+        
+        extra_kwargs = {
+            'manager_id': {'required': False}
+        }
