@@ -234,3 +234,33 @@ class AssignTaskToTeamMember(APIView):
                              }, status=status.HTTP_200_OK)
         except Exception as error:
             return Response({'ERROR': str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class AssignManagerToProject(APIView):
+    
+    def post(self,request, project_id):
+        try:
+            project = get_object_or_404(Project, id=project_id)
+            manager_id = request.data.get('manager_id')
+            currentManager = get_object_or_404(Manager, id=manager_id)
+            
+            project.manager_id = currentManager
+            project.save()
+            return Response({ 'message': f'Manager {currentManager.name} assigned to {project.title} succcessfully' 
+                             },status=status.HTTP_200_OK)
+        except Exception as error:
+            return Response({'ERROR': str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)  
+        
+
+class TeamMemberTasks(APIView):
+    
+    def get(self, rquest, teamMember_id):
+        team_member = get_object_or_404(TeamMember, id=teamMember_id)
+        tasks = team_member.tasks.all()
+        serializer = TaskSerializer(Task, mant=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    
+        
+        
