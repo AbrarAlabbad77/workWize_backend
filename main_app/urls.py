@@ -1,7 +1,9 @@
 from django.urls import path
 from .views import ManagerIndex, ManagerDetails, TeamMemberDetails,AssignTaskToTeamMember
 from .views import TeamMemberIndex, ProjectDetails, ProjectIndex, TaskDetails, TaskIndex
-from .views import AssignManagerToProject, TeamMemberTasks, ProjectTask
+from .views import AssignManagerToProject, TeamMemberTasks, ProjectTask,SignupUserView
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+
 
 urlpatterns = [
     # Manger CRUD
@@ -27,6 +29,11 @@ urlpatterns = [
     
     path('members/<int:teamMember_id>/tasks/', TeamMemberTasks.as_view(), name='TeamMemberTasks_path'),
     path('members/<int:teamMember_id>/assign-task/',AssignTaskToTeamMember.as_view(), name='assign-task_path'),
-
-   
+    
+    
+    # For authauthentication
+    path('login/',TokenObtainPairView.as_view(), name='login_path'),
+    path('token/refresh/',TokenRefreshView.as_view(), name='token_refresh_path'),
+    path('signup/',SignupUserView.as_view(), name='signUp_path')
+ 
 ]

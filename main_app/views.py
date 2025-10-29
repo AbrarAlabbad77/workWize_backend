@@ -1,16 +1,25 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model # user model from django
+
 
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializers import ManagerSerializer, TaskSerializer, TeamMemberSerializer, ProjectSerializer
 from .models import Manager, Task, TeamMember, Project
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
+
 
 
 # Create your views here.
+User = get_user_model()
+
+
+
 class ManagerIndex(APIView):
-    
+    permission_classes = [IsAuthenticated]
+
     def get(self,request):
         queryset = Manager.objects.all()
         serializer = ManagerSerializer(queryset, many=True)
@@ -271,7 +280,41 @@ class ProjectTask(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
         
         
+
+#  ############################# signUp  ##############################
+
+class SignupUserView(APIView):
+    permission_classes = [AllowAny]
     
+    def post(self,request):
+        username = request.data.get('username')
+        email=request.data.get('email')
+        password = request.data.get('password') 
+        
+        # check that user enter required info
+        if not username or not password or not email:
+            return Response(
+                {'error':'please provide a username annnd password'},status=status.HTTP_400_BAD_REQUEST,
+            )
+            
+        # to check if the username exit , as username must be unique
+        if User.object.filter(username=username).exists():
+            return Response({'error':'User already Exists'},
+                status=status.HTTP_400_BAD_REQUEST)   
+         
+            
+        # this line will create the new user 
+        newUser  = User.object.Create_user(
+            username = username,
+            email = email,
+            password = password
+        )  
+        
+        return Response({
+            'id': user.id,
+            'username': user.username,
+            'email': user.email
+        }, status=status.HTTP_201_CREATED )  
     
     
         
