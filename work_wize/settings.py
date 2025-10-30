@@ -55,7 +55,7 @@ MIDDLEWARE = [
 
 #  LIST OF ALL THE PLACESE THAT OUR APP allow request from
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173'
+    'http://localhost:5174'
 ]
 
 ROOT_URLCONF = 'work_wize.urls'

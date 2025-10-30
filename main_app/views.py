@@ -71,7 +71,7 @@ class ManagerDetails(APIView):
 
 
 class TeamMemberIndex(APIView):
-    
+    permission_classes = [AllowAny] 
     def get(self,request):
         queryset = TeamMember.objects.all()
         serializer = TeamMemberSerializer(queryset, many=True)
@@ -177,7 +177,7 @@ class ProjectDetails(APIView):
 #  ############################# Task  CRUD ##############################
 
 class TaskIndex(APIView):
-    
+    permission_classes = [AllowAny] 
     def get(self,request):
         queryset = Task.objects.all()
         serializer = TaskSerializer(queryset, many=True)
@@ -290,6 +290,7 @@ class SignupUserView(APIView):
         username = request.data.get('username')
         email=request.data.get('email')
         password = request.data.get('password') 
+        phone=request.data.get('phone')
         
         # check that user enter required info
         if not username or not password or not email:
@@ -298,22 +299,31 @@ class SignupUserView(APIView):
             )
             
         # to check if the username exit , as username must be unique
-        if User.object.filter(username=username).exists():
+        if User.objects.filter(username=username).exists():
             return Response({'error':'User already Exists'},
                 status=status.HTTP_400_BAD_REQUEST)   
          
             
         # this line will create the new user 
-        newUser  = User.object.Create_user(
+        newUser  = User.objects.create_user(
             username = username,
             email = email,
-            password = password
+            password = password,
         )  
         
+        team_member = TeamMember.objects.create(
+            name=username,
+            email=email,
+            phone=phone,
+            user=newUser
+            
+        )
+        
+    
         return Response({
-            'id': user.id,
-            'username': user.username,
-            'email': user.email
+            'id': newUser.id,
+            'username': newUser.username,
+            'email': newUser.email
         }, status=status.HTTP_201_CREATED )  
     
     

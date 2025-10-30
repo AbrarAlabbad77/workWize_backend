@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
 # Create your models here.
 class Manager(models.Model):
@@ -30,11 +31,13 @@ class Task(models.Model):
     def __str__(self):
         return self.title 
 
-    
+User =  get_user_model()
 class TeamMember(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField(max_length=50,  unique=True)
     phone = models.CharField(max_length=10)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)  
+
     
     # M TO M between Task and Team Member
     tasks = models.ManyToManyField(Task)
