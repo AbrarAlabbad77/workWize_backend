@@ -235,11 +235,15 @@ class AssignTaskToTeamMember(APIView):
         try:
             team_member = get_object_or_404(TeamMember, id=teamMember_id) 
             task_id = request.data.get('task_id')
-            cureentTask = get_object_or_404(Task, id=task_id)
+            currentTask = get_object_or_404(Task, id=task_id)
             
-            # have the member in (team_member) var and the task id in (cureentTask) var
-            team_member.tasks.add(cureentTask)
-            return Response({'message': f'Task {cureentTask.title} assigned to {team_member.name} succcessfully' 
+            # have the member in (team_member) var and the task id in (currentTask) var
+            # team_member.tasks.add(currentTask)
+            currentTask.assignee= team_member
+            currentTask.save()
+            
+            
+            return Response({'message': f'Task {currentTask.title} assigned to {team_member.name} succcessfully' 
                              }, status=status.HTTP_200_OK)
         except Exception as error:
             return Response({'ERROR': str(error)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -265,7 +269,8 @@ class TeamMemberTasks(APIView):
     
     def get(self, request, teamMember_id):
         team_member = get_object_or_404(TeamMember, id=teamMember_id)
-        tasks = team_member.tasks.all()
+        # tasks = team_member.tasks.all()
+        tasks = Task.objects.filter(assignee=team_member)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
