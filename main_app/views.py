@@ -38,7 +38,8 @@ class ManagerIndex(APIView):
     
     
 class ManagerDetails(APIView):
-    
+    permission_classes = [IsAuthenticated]
+     
     #  get specific manager by id 
     def get(self, request, manager_id):
         queryset = Manager.objects.get(id=manager_id)
@@ -71,7 +72,8 @@ class ManagerDetails(APIView):
 
 
 class TeamMemberIndex(APIView):
-    permission_classes = [AllowAny] 
+    permission_classes = [IsAuthenticated]
+     
     def get(self,request):
         queryset = TeamMember.objects.all()
         serializer = TeamMemberSerializer(queryset, many=True)
@@ -91,6 +93,7 @@ class TeamMemberIndex(APIView):
 
 
 class TeamMemberDetails(APIView):
+    permission_classes = [IsAuthenticated]
     
     #  get specific Team member by id 
     def get(self, request, teamMember_id):
@@ -123,6 +126,7 @@ class TeamMemberDetails(APIView):
 #  ############################# Project  CRUD ##############################
 
 class ProjectIndex(APIView):
+    permission_classes = [IsAuthenticated]
     
     def get(self,request):
         queryset = Project.objects.all()
@@ -143,7 +147,7 @@ class ProjectIndex(APIView):
 
 
 class ProjectDetails(APIView):
-    
+    permission_classes = [IsAuthenticated]
     #  get specific Teproject  by id 
     def get(self, request, project_id):
         queryset = get_object_or_404(Project, id=project_id)
@@ -177,7 +181,8 @@ class ProjectDetails(APIView):
 #  ############################# Task  CRUD ##############################
 
 class TaskIndex(APIView):
-    permission_classes = [AllowAny] 
+    permission_classes = [IsAuthenticated]
+    
     def get(self,request):
         queryset = Task.objects.all()
         serializer = TaskSerializer(queryset, many=True)
@@ -196,6 +201,7 @@ class TaskIndex(APIView):
 
 
 class TaskDetails(APIView):
+    permission_classes = [IsAuthenticated]
     
     #  get specific task  by id 
     def get(self, request, task_id):
@@ -230,6 +236,7 @@ class TaskDetails(APIView):
 
 # assign task to specific team member 
 class AssignTaskToTeamMember(APIView):
+    permission_classes = [IsAuthenticated]
     
     def post(self,request, teamMember_id):
         try:
@@ -250,6 +257,7 @@ class AssignTaskToTeamMember(APIView):
 
 # update manager for  project
 class AssignManagerToProject(APIView):
+    permission_classes = [IsAuthenticated]
     
     def post(self,request, project_id):
         try:
@@ -266,6 +274,7 @@ class AssignManagerToProject(APIView):
         
 # get all task for specific team member 
 class TeamMemberTasks(APIView):
+    permission_classes = [IsAuthenticated]
     
     def get(self, request, teamMember_id):
         team_member = get_object_or_404(TeamMember, id=teamMember_id)
@@ -277,13 +286,26 @@ class TeamMemberTasks(APIView):
 
 # get all task for specific project 
 class ProjectTask(APIView):
+    permission_classes = [IsAuthenticated]
     
     def get(self,request, project_id):
         project= get_object_or_404(Project, id=project_id)
         tasks = Task.objects.filter(project_id=project_id)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
-        
+
+
+# to get all project assign to specific team member 
+class UserProjectsView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        team_member = get_object_or_404(TeamMember, user=request.user)
+        projects = Project.objects.filter(task__assignee=team_member).distinct()
+ 
+        serializer = ProjectSerializer(projects, many=True)
+        return Response(serializer.data)
+
         
 
 #  ############################# signUp  ##############################
