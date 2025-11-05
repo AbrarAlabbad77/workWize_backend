@@ -306,6 +306,18 @@ class UserProjectsView(APIView):
         serializer = ProjectSerializer(projects, many=True)
         return Response(serializer.data)
 
+#  add task to specific porject 
+class CreateProjectTask(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, project_id):
+        project = get_object_or_404(Project, id=project_id)
+        serializer = TaskSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(project_id=project)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
         
 
 #  ############################# signUp  ##############################

@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import ManagerIndex, ManagerDetails, TeamMemberDetails,AssignTaskToTeamMember
-from .views import TeamMemberIndex, ProjectDetails, ProjectIndex, TaskDetails, TaskIndex
+from .views import TeamMemberIndex, ProjectDetails, ProjectIndex, TaskDetails, TaskIndex ,CreateProjectTask
 from .views import AssignManagerToProject, TeamMemberTasks, ProjectTask,SignupUserView, UserProjectsView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
@@ -26,6 +26,8 @@ urlpatterns = [
     # Relationship Endpoints
     path('projects/<int:project_id>/assign-manager/',AssignManagerToProject.as_view(), name='AssignManager_path'),
     path('projects/<int:project_id>/tasks/',ProjectTask.as_view(),name='ProjectTask_path'),
+    path('projects/<int:project_id>/add-task/', CreateProjectTask.as_view(), name='CreateProjectTask_path'),
+
     
     path('myspacese/', UserProjectsView.as_view(), name='user-spacese'),
     
