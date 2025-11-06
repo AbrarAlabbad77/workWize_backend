@@ -9,6 +9,8 @@ from rest_framework.response import Response
 from .serializers import ManagerSerializer, TaskSerializer, TeamMemberSerializer, ProjectSerializer
 from .models import Manager, Task, TeamMember, Project
 from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
+from django.db.models import Q
+
 
 
 
@@ -133,8 +135,8 @@ class ProjectIndex(APIView):
         serializer = ProjectSerializer(queryset, many=True)
         return Response(serializer.data)
     
-    
     def post(self,request):
+        
         try:
             serializer = ProjectSerializer(data=request.data)
             if serializer.is_valid():
@@ -244,8 +246,6 @@ class AssignTaskToTeamMember(APIView):
             task_id = request.data.get('task_id')
             currentTask = get_object_or_404(Task, id=task_id)
             
-            # have the member in (team_member) var and the task id in (currentTask) var
-            # team_member.tasks.add(currentTask)
             currentTask.assignee= team_member
             currentTask.save()
             

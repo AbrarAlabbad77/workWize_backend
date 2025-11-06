@@ -30,5 +30,5 @@ class ProjectSerializer(serializers.ModelSerializer):
         fields = '__all__' 
         
         extra_kwargs = {
-            'manager_id': {'required': False}
+            'manager': {'required': False}
         }

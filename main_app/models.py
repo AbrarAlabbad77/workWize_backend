@@ -23,7 +23,7 @@ class Project(models.Model):
     title = models.CharField(max_length=50)
     description = models.CharField(max_length=100)
     deadline = models.DateField()
-    manager_id = models.ForeignKey(Manager, on_delete=models.RESTRICT)
+    manager = models.ForeignKey(Manager, on_delete=models.RESTRICT)
     
     def __str__(self):
         return self.title
