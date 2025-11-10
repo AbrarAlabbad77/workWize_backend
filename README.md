@@ -26,7 +26,7 @@ You can find the Backend source code here:
 ## ✅ Planning
 
 ### 📌 Entity Relationship Diagram (ERD)
-![ERD Diagram](images/ERD.png)
+![ERD Diagram](ERD.png)
 
 # RESTful Routing 
 ## Routing Table (Server/Backend) 
