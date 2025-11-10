@@ -6,43 +6,6 @@ ______________________
 
 Workwize is a fully integrated,  project that represents  the skills I've learned in the software engineering Bootcamp. It's a project and task management system designed for businesses and teams to streamline workflows efficiently. The application allows users to create workspaces, manage tasks, assign team members, and monitor progress through an interactive dashboard. The backend was developed using Python, the Django REST framework (DRF), and PostgreSQL, while the frontend was built using React and Tailwind CSS, with JWT authentication for secure access.
 
-## ✅ Getting Started / Code Installation
-
-To run this project locally, follow these steps:
-
----
-
-### **📌 1. Clone the repositories**
-
-```
-git clone git@github.com:AbrarAlabbad77/workWize_backend.git
-git clone git@github.com:AbrarAlabbad77/workWize_frontend.git
-```
-
----
-
-### **📌 2. Navigate to the project folder**
-Backend:
-```
-cd workWize_backend
-```
-
-Frontend:
-```
-cd workWize_frontend
-```
-
----
-
-### **📌 3. Create & activate a virtual environment (Backend only)**
-
-```
-python -m venv venv
-source venv/bin/activate
-```
-
----
-
 ## ✅ Technologies Used
 
 | Area          | Technologies |
@@ -55,7 +18,8 @@ source venv/bin/activate
 ## 🔗 Back End Repository
 
 You can find the Backend source code here:  
-👉 [Frontend Repository](https://github.com/AbrarAlabbad77/workWize_backend)
+👉 [Backend Repository](https://github.com/AbrarAlabbad77/workWize_backend)
+👉 [Frontend Repository](https://github.com/AbrarAlabbad77/workWize_frontend)
 
 ---
 
@@ -101,13 +65,6 @@ You can find the Backend source code here:
 | GET    | `/api/managers/:id` | Get specific manager    | Read   |
 | PUT    | `/api/managers/:id` | Update specific manager | Update |
 | DELETE | `/api/managers/:id` | Delete specific manager | Delete |
-
----TaskAssignment---
-| Method | Endpoint                               | Description                        | 
-| ------ | -------------------------------------- | ---------------------------------- | 
-| GET    | `/api/tasks/:taskId/members`           | Get all members assigned to a task | 
-| POST   | `/api/tasks/:taskId/members`           | Assign a member to a task          | 
-| DELETE | `/api/tasks/:taskId/members/:memberId` | Remove a member from a task        | 
 
 
 ## Routing Table (Client/Frontend)
