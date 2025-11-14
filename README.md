@@ -2,11 +2,11 @@
 
 ______________________ 
 
-## Description
+## 📝 Description
 
 Workwize is a fully integrated,  project that represents  the skills I've learned in the software engineering Bootcamp. It's a project and task management system designed for businesses and teams to streamline workflows efficiently. The application allows users to create workspaces, manage tasks, assign team members, and monitor progress through an interactive dashboard. The backend was developed using Python, the Django REST framework (DRF), and PostgreSQL, while the frontend was built using React and Tailwind CSS, with JWT authentication for secure access.
 
-## ✅ Technologies Used
+## 💻 Technologies Used
 
 | Area          | Technologies |
 |---------------|--------------|
@@ -80,7 +80,30 @@ You can find the Backend source code here:
 | `/spaces/:project_id/newtask` | `<NewTask />`     | Create a new task inside a specific workspace   |
 
 
-## IceBox Features
+## 🖼️ Screenshots
+Landing Page:  
+![Landing Page](landpage.png)
+
+Sigu up Page:  
+![Landing Page](signup.png)
+
+Home Page:  
+![Dashboard](homepage.png)
+
+Project Dashboard:  
+![Dashboard](dasboard.png)
+
+
+## ✅ Features 
+- Create and manage workspaces/projects
+- Assign tasks to team members
+- Track task status and progress
+- Interactive dashboard with task overview
+- Secure authentication using JWT
+- Responsive UI built with React and Tailwind CSS
+
+
+## 🚀 Future Improvements
 1. Add comments model
 2. user can add comments to specific Task 
 3. DasshBoard 
@@ -92,3 +115,11 @@ You can find the Backend source code here:
 9. Add about me page
 10. Add notification model
 11. Add calander  
+
+
+## 📫 Contact
+
+- 💼 LinkedIn: [Abrar Alabbad](https://www.linkedin.com/in/abrar-alabbad-948b83279/)
+- 🎨 Behance: [Abrar Alabbad](https://www.behance.net/abraralabbad)
+- 🔗 Portfolio: [Abrar Portfolio](https://abraralabbad77.github.io/Portfolio/)
+- 📧 Email: AbrarAlabbad192@outlook.com
