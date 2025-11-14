@@ -104,17 +104,19 @@ Project Dashboard:
 
 
 ## 🚀 Future Improvements
-1. Add comments model
-2. user can add comments to specific Task 
-3. DasshBoard 
-4. Add graph in DasshBoard showing task with high priority 
-5. Add graph in DasshBoard showing task that due soon 
-6. Add Team model
-7. Add group of uers to one team
-8. Add Profile 
-9. Add about me page
-10. Add notification model
-11. Add calander  
+
+1. Implement a comments model for tasks.  
+2. Allow users to add comments on specific tasks.  
+3. Enhance the dashboard with additional functionality.  
+4. Add a graph to the dashboard showing high-priority tasks.  
+5. Add a graph to the dashboard highlighting tasks nearing their due date.  
+6. Implement a team model for better group management.  
+7. Allow grouping of users into teams.  
+8. Add user profile management features.  
+9. Include an “About Me” page for user information.  
+10. Implement a notification system for updates and reminders.  
+11. Integrate a calendar feature to track tasks and deadlines.
+
 
 
 ## 📫 Contact
